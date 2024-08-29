@@ -1,6 +1,6 @@
 import style from "./auth.module.css";
 import lockImg from "../../assets/LockImg.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { register } from "../../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -27,6 +27,8 @@ const Register = () => {
       if (!user?.password) throw "Password is Required !";
       const result = await register(user);
       if (result) {
+        localStorage.setItem("token", result.data?.data?.token);
+
         navigate("/");
       }
     } catch (error) {
@@ -34,6 +36,12 @@ const Register = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className={style.container}>
       <div className={style.left}>

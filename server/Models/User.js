@@ -17,21 +17,13 @@ const userSchema = new Schema({
     required: [true, "Password is Required !"],
     select: false,
   },
-  profileImg: {
-    type: String,
-    default: "",
-  },
-  fName: {
-    type: String,
-    default: "",
-  },
-  lName: {
-    type: String,
-    default: "",
-  },
-  phone: {
+  balance: {
     type: Number,
-    default: null,
+    default: 0,
+  },
+  blocked: {
+    type: Boolean,
+    default: false,
   },
 });
 

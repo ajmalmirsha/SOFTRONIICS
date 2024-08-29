@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  padding: 4rem;
+  background-color: #0a5f59;
+  color: white;
+  height: 100vh;
+  overflow: auto;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.userListContainer {
+  display: flex;
+  background-color: #fffae9;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 10px;
+  color: black;
+  padding: 2rem;
+}
+
+.userRowContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userTable button {
+  width: 6rem;
+  font-weight: 700;
+  font-style: 1.5rem;
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.blockBtn {
+  background-color: red;
+  color: white;
+}
+
+.unBlockBtn {
+  background-color: rgb(0, 255, 119);
+  color: black;
+}
+
+.userTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header button {
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #fffae9;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+}
+
+
+.navRightWrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logOutBtn {
+ cursor: pointer;
+}

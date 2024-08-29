@@ -1,10 +1,10 @@
 import style from "./auth.module.css";
-import lockImg from "../../assets/LockImg.svg";
+import lockImg from "../../../assets/LockImg.svg";
 import { useEffect, useState } from "react";
-import { login } from "../../Api/Api";
+import { adminLogin } from "../../../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const AdminLogin = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -23,10 +23,10 @@ const Login = () => {
     try {
       if (!user?.email) throw "Email is Required !";
       if (!user?.password) throw "Password is Required !";
-      const result = await login(user);
+      const result = await adminLogin(user);
       if (result) {
-        localStorage.setItem("token", result.data?.data?.token);
-        navigate("/");
+        localStorage.setItem("admin-token", result.data?.data?.token);
+        navigate("/admin");
       }
     } catch (error) {
       setErr(error?.response?.data?.error || error?.message || error);
@@ -35,15 +35,15 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/");
+    if (localStorage.getItem("admin-token")) {
+      navigate("/admin");
     }
   }, []);
   return (
     <div className={style.container}>
       <div className={style.left}>
         <div className={style.formWrapper}>
-          <h3>Login</h3>
+          <h3>Admin Login</h3>
           <p>Login to access your account</p>
           <br />
           <form onSubmit={handleSubmit}>
@@ -70,12 +70,6 @@ const Login = () => {
             <p className={style.error}>{err}</p>
             <br />
             <button type="submit">Login</button>
-            <p className={style.footerText}>
-              Don’t have an account?{" "}
-              <Link to={"/register"}>
-                <span>Sign Up</span>
-              </Link>
-            </p>
           </form>
         </div>
       </div>
@@ -86,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

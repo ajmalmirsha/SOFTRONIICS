@@ -28,9 +28,12 @@ app.use(express.json());
 
 app.use("/auth", require("./router/Auth"));
 
+app.use("/admin", require("./router/Admin"));
+
 app.use(authenticate);
 
 app.use("/user", require("./router/User"));
+app.use("/transaction", require("./router/Transaction"));
 
 app.listen(port, () => {
   console.log(`server started listening to ${port} port`);

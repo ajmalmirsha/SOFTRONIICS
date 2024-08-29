@@ -1,10 +1,11 @@
 const { errorResponse } = require("../Utils/Response");
 const { decodeJwtToken } = require("../Utils/Jwt");
-const userModel = require("../Models/User");
+const adminModel = require("../Models/Admin");
 
 module.exports = {
-  authenticate: async (req, res, next) => {
+  authenticateAdmin: async (req, res, next) => {
     try {
+        console.log("on auth admin");
       const token = req.headers?.authorization?.split(" ").pop();
       if (!token) {
         errorResponse(
@@ -15,19 +16,17 @@ module.exports = {
         );
       } else {
         const decode = decodeJwtToken(token);
-        req.headers.userId = decode.id;
-        const user = await userModel.findOne({
-          _id: decode.id,
-          blocked: false,
-        });
-        if (!user) {
+        const admin = await adminModel.findById(decode.id);
+        console.log("admin", admin, decode.id)
+        if (!admin) {
           return errorResponse(
             res,
-            "user blocked",
+            "authorization failed admin can only access",
             "authentication failed",
             401
           );
         }
+        req.headers.adminId = decode.id;
         next();
       }
     } catch (error) {
